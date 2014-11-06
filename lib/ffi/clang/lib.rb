@@ -24,7 +24,7 @@ module FFI
 		module Lib
 			extend FFI::Library
 
-			libs = ["clang"]
+			libs = [ "clang", `llvm-config --libdir 2>/dev/null`.chomp + "/libclang.so" ]
 
 			if ENV['LIBCLANG']
 				libs << ENV['LIBCLANG']
