@@ -216,7 +216,7 @@ module FFI
 				layout(
 					:major, :int,
 					:minor, :int,
-					:subminor, :int,
+					:subminor, :int
 				)
 
 				def major
@@ -247,7 +247,7 @@ module FFI
 					:deprecated, CXVersion,
 					:obsoleted, CXVersion,
 					:unavailable, :int,
-					:message, CXString,
+					:message, CXString
 				)
 			end
 

@@ -24,7 +24,7 @@ module FFI
 			class CXToken < FFI::Struct
 				layout(
 					:int_data, [:uint, 4],
-					:ptr_data, :pointer,
+					:ptr_data, :pointer
 				)
 			end
 

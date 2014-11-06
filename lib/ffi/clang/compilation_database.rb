@@ -116,7 +116,7 @@ module FFI
 
 				def mapped_sources
 					num_mapped_sources.times.map { |i|
-						{path: mapped_source_path(i), content: mapped_source_content(i)}
+						{ :path => mapped_source_path(i), :content => mapped_source_content(i)}
 					}
 				end
 			end

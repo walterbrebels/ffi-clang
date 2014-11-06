@@ -82,7 +82,7 @@ module FFI
 			class CXTUResourceUsageEntry < FFI::Struct
 				layout(
 					:kind, :resource_usage_kind,
-					:amount, :ulong,
+					:amount, :ulong
 				)
 			end
 

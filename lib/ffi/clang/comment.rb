@@ -126,8 +126,8 @@ module FFI
 			def attrs
 				num_attrs.times.map { |i|
 					{
-						name: Lib.extract_string(Lib.html_start_tag_comment_get_attr_name(@comment, i)),
-						value: Lib.extract_string(Lib.html_start_tag_comment_get_attr_value(@comment, i)),
+						:name => Lib.extract_string(Lib.html_start_tag_comment_get_attr_name(@comment, i)),
+						:value => Lib.extract_string(Lib.html_start_tag_comment_get_attr_value(@comment, i)),
 					}
 			  }
 			end

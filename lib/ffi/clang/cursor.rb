@@ -276,11 +276,11 @@ module FFI
 
 				# return as Hash
 				{
-					always_deprecated: always_deprecated_ptr.get_int(0),
-					always_unavailable: always_unavailable_ptr.get_int(0),
-					deprecated_message: Lib.extract_string(Lib::CXString.new(deprecated_message_ptr)),
-					unavailable_message: Lib.extract_string(Lib::CXString.new(unavailable_message_ptr)),
-					availability: availability
+					:always_deprecated => always_deprecated_ptr.get_int(0),
+					:always_unavailable => always_unavailable_ptr.get_int(0),
+					:deprecated_message => Lib.extract_string(Lib::CXString.new(deprecated_message_ptr)),
+					:unavailable_message => Lib.extract_string(Lib::CXString.new(unavailable_message_ptr)),
+					:availability => availability
 				}
 			end
 

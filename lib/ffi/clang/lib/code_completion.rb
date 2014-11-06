@@ -30,14 +30,14 @@ module FFI
 			class CXCompletionResult < FFI::Struct
 				layout(
 					:kind, :cursor_kind,
-					:string, :CXCompletionString,
+					:string, :CXCompletionString
 				)
 			end
 
 			class CXCodeCompleteResults < FFI::Struct
 				layout(
 					:results, :pointer,
-					:num, :uint,
+					:num, :uint
 				)
 			end
 

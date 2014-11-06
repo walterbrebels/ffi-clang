@@ -63,7 +63,7 @@ module FFI
 				n.times.map { |i|
 				ptr = MemoryPointer.new Lib::CXSourceRange
 					replace_text = Lib.extract_string(Lib.get_diagnostic_fix_it(self, i, ptr))
-					{text: replace_text, range: SourceRange.new(ptr)}
+					{ :text => replace_text, :range => SourceRange.new(ptr)}
 				}
 			end
 

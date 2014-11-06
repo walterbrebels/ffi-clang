@@ -40,7 +40,7 @@ describe Tokens do
 	end
 
 	it "#each" do
-		spy = double(stub: nil)
+		spy = double(:stub => nil)
 		expect(spy).to receive(:stub).exactly(tokens.size).times
 		tokens.each { spy.stub }
 	end

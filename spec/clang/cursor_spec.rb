@@ -27,7 +27,7 @@ describe Cursor do
 	let(:cursor) { Index.new.parse_translation_unit(fixture_path("list.c")).cursor }
 	let(:cursor_cxx) { Index.new.parse_translation_unit(fixture_path("test.cxx")).cursor }
 	let(:cursor_canon) { Index.new.parse_translation_unit(fixture_path("canonical.c")).cursor }
-	let(:cursor_pp) { Index.new.parse_translation_unit(fixture_path("docs.c"),[],[],{detailed_preprocessing_record: true}).cursor }
+	let(:cursor_pp) { Index.new.parse_translation_unit(fixture_path("docs.c"),[],[],{:detailed_preprocessing_record => true}).cursor }
 
 	it "can be obtained from a translation unit" do
 		cursor.should be_kind_of(Cursor)
@@ -52,12 +52,12 @@ describe Cursor do
 			expect(extent.start.line).to equal(1)
 		end
 
-		it 'has filename and posion at end point', from_3_4: true do
+		it 'has filename and posion at end point', :from_3_4 => true do
 			expect(extent.end.file).to eq(fixture_path("list.c"))
 			expect(extent.end.line).to equal(12)
 		end
 
-		it 'has filename and posion at end point', upto_3_3: true do
+		it 'has filename and posion at end point', :upto_3_3 => true do
 			expect(extent.end.file).to eq(fixture_path("list.c"))
 			expect(extent.end.line).to equal(11)
 		end
@@ -196,11 +196,11 @@ describe Cursor do
 		let(:public_cursor) { find_matching(cursor_cxx) { |child, parent|
 				child.kind == :cursor_field_decl and child.spelling == 'public_member_int' } }
 
-		it 'checks access control level is public', from_3_3: true do
+		it 'checks access control level is public', :from_3_3 => true do
 			expect(public_cursor.public?).to be true
 		end
 
-		it 'returns false on clang 3.2', upto_3_2: true do
+		it 'returns false on clang 3.2', :upto_3_2 => true do
 			expect(public_cursor.public?).to be false
 		end
 	end
@@ -209,11 +209,11 @@ describe Cursor do
 		let(:private_cursor) { find_matching(cursor_cxx) { |child, parent|
 				child.kind == :cursor_field_decl and child.spelling == 'private_member_int' } }
 
-		it 'checks access control level is private', from_3_3: true do
+		it 'checks access control level is private', :from_3_3 => true do
 			expect(private_cursor.private?).to be true
 		end
 
-		it 'returns false on clang 3.2', upto_3_2: true do
+		it 'returns false on clang 3.2', :upto_3_2 => true do
 			expect(private_cursor.private?).to be false
 		end
 	end
@@ -222,11 +222,11 @@ describe Cursor do
 		let(:protected_cursor) { find_matching(cursor_cxx) { |child, parent|
 				child.kind == :cursor_field_decl and child.spelling == 'protected_member_int' } }
 
-		it 'checks access control level is protected', from_3_3: true do
+		it 'checks access control level is protected', :from_3_3 => true do
 			expect(protected_cursor.protected?).to be true
 		end
 
-		it 'returns false on clang 3.2', upto_3_2: true do
+		it 'returns false on clang 3.2', :upto_3_2 => true do
 			expect(protected_cursor.protected?).to be false
 		end
 	end
@@ -266,7 +266,7 @@ describe Cursor do
 		end
 	end
 
-	describe '#pure_virtual?', from_3_4: true do
+	describe '#pure_virtual?', :from_3_4 => true do
 		let(:pure_virtual_cursor) { find_matching(cursor_cxx) { |child, parent|
 				child.kind == :cursor_cxx_method and
 				child.spelling == 'func_a' and parent.spelling == 'A' } }
@@ -313,7 +313,7 @@ describe Cursor do
 		end
 	end
 
-	describe '#specialized_template', from_3_3: true do # looks not working on 3.2
+	describe '#specialized_template', :from_3_3 => true do # looks not working on 3.2
 		let(:cursor_function) { find_matching(cursor_cxx) { |child, parent|
 				child.kind == :cursor_function and child.spelling == 'func_overloaded' } }
 
@@ -351,7 +351,7 @@ describe Cursor do
 		end
 	end
 
-	describe '#template_kind', from_3_3: true do # looks not working on 3.2
+	describe '#template_kind', :from_3_3 => true do # looks not working on 3.2
 		let(:template) { find_matching(cursor_cxx) { |child, parent|
 				child.kind == :cursor_function_template and child.spelling == 'func_overloaded' } }
 
@@ -365,11 +365,11 @@ describe Cursor do
 		let(:access_specifier_cursor) { find_matching(cursor_cxx) { |child, parent|
 				child.kind == :cursor_cxx_method and child.spelling == 'func_d' } }
 
-		it 'returns access specifier symbol', from_3_3: true do
+		it 'returns access specifier symbol', :from_3_3 => true do
 			access_specifier_cursor.access_specifier.should equal :private
 		end
 
-		it 'returns access specifier symbol(invalid, why?)', upto_3_2: true do
+		it 'returns access specifier symbol(invalid, why?)', :upto_3_2 => true do
 			access_specifier_cursor.access_specifier.should equal :invalid
 		end
 	end
@@ -451,7 +451,7 @@ describe Cursor do
 		end
 	end
 
-	describe '#variadic?', from_3_3: true do
+	describe '#variadic?', :from_3_3 => true do
 		let(:func) { find_matching(cursor_cxx) { |child, parent|
 				child.kind == :cursor_function and child.spelling == 'f_variadic' } }
 
@@ -506,7 +506,7 @@ describe Cursor do
 		end
 	end
 
-	describe '#bitfield?', from_3_3: true do
+	describe '#bitfield?', :from_3_3 => true do
 		let(:bitfield) { find_matching(cursor_cxx) { |child, parent|
 				child.kind == :cursor_field_decl and child.spelling == 'bit_field_a' } }
 		let(:non_bitfield) { find_matching(cursor_cxx) { |child, parent|
@@ -521,7 +521,7 @@ describe Cursor do
 		end
 	end
 
-	describe '#bitwidth', from_3_3: true do
+	describe '#bitwidth', :from_3_3 => true do
 		let(:bitfield) { find_matching(cursor_cxx) { |child, parent|
 				child.kind == :cursor_field_decl and child.spelling == 'bit_field_a' } }
 		let(:non_bitfield) { find_matching(cursor_cxx) { |child, parent|

@@ -54,7 +54,7 @@ describe CodeCompletion do
 		end
 
 		it "#each" do
-			spy = double(stub: nil)
+			spy = double(:stub => nil)
 			expect(spy).to receive(:stub).exactly(results.size).times
 			results.each { spy.stub }
 		end

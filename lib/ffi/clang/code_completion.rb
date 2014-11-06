@@ -150,7 +150,7 @@ module FFI
 
 				def chunks
 					num_chunks.times.map { |i|
-						{ kind: chunk_kind(i), text: chunk_text(i), completion: chunk_completion(i) }
+						{ :kind => chunk_kind(i), :text => chunk_text(i), :completion => chunk_completion(i) }
 					}
 				end
 
