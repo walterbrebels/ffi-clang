@@ -49,8 +49,6 @@ module FFI
 						end
 					
 						@@clang_version = [major, minor]
-						
-						puts "Clang version detected: #{@@clang_version.inspect}"
 					else
 						abort "Invalid/unsupported clang version string."
 					end
